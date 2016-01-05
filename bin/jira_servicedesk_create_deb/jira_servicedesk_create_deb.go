@@ -77,7 +77,7 @@ func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_arc
 	if len(config.Version) == 0 {
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
-	sourceDir := fmt.Sprintf("atlassian-jira_servicedesk-%s", config.Version)
+	sourceDir := fmt.Sprintf("atlassian-jira-servicedesk-%s-standalone", config.Version)
 	targetDir := jira_servicedesk.TARGET
 	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
 }

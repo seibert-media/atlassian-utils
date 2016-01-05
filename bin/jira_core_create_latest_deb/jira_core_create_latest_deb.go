@@ -81,7 +81,7 @@ func do(writer io.Writer, createPackage CreatePackage, config_parser debian_conf
 	if err != nil {
 		return err
 	}
-	sourceDir := fmt.Sprintf("atlassian-jira_core-%s", config.Version)
+	sourceDir := fmt.Sprintf("atlassian-jira-core-%s-standalone", config.Version)
 	targetDir := jira_core.TARGET
 	return createPackage(config, sourceDir, targetDir)
 }
