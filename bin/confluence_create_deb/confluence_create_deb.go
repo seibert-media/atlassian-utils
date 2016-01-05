@@ -7,6 +7,7 @@ import (
 	"os"
 	"runtime"
 
+	"github.com/bborbe/atlassian_utils/confluence"
 	command_list "github.com/bborbe/command/list"
 	debian_config "github.com/bborbe/debian_utils/config"
 	debian_config_builder "github.com/bborbe/debian_utils/config_builder"
@@ -16,7 +17,6 @@ import (
 	debian_package_creator_archive "github.com/bborbe/debian_utils/package_creator_archive"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
 	"github.com/bborbe/log"
-	"github.com/bborbe/atlassian_utils/confluence"
 )
 
 var logger = log.DefaultLogger

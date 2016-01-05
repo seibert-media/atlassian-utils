@@ -11,8 +11,6 @@ import (
 
 var logger = log.DefaultLogger
 
-
-
 type Download func(url string) (resp *http.Response, err error)
 
 type VersionInfo interface {
@@ -52,7 +50,7 @@ func getContent(download Download, jsonUrl string) ([]byte, error) {
 
 func parseInfos(content []byte) ([]atlassian_information.VersionInformation, error) {
 	var list []atlassian_information.VersionInformation
-	c := content[10 : len(content) - 1]
+	c := content[10 : len(content)-1]
 	if err := json.Unmarshal(c, &list); err != nil {
 		return nil, err
 	}

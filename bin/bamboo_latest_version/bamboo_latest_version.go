@@ -8,11 +8,11 @@ import (
 
 	"fmt"
 
+	"github.com/bborbe/atlassian_utils/bamboo"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
 	http_client "github.com/bborbe/http/client"
 	"github.com/bborbe/log"
-	"github.com/bborbe/atlassian_utils/bamboo"
 )
 
 var logger = log.DefaultLogger
@@ -21,7 +21,7 @@ const (
 	PARAMETER_LOGLEVEL = "loglevel"
 )
 
-type LatestConfluenceVersion func() (string, error)
+type LatestVersion func() (string, error)
 
 func main() {
 	defer logger.Close()
@@ -33,11 +33,11 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClient := http_client.New()
-	latestInformations := atlassian_utils_latest_information.New(bamboo.JSON_URL,httpClient.Get)
+	latestInformations := atlassian_utils_latest_information.New(bamboo.JSON_URL, httpClient.Get)
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)
 
 	writer := os.Stdout
-	err := do(writer, latestVersion.LatestConfluenceVersion)
+	err := do(writer, latestVersion.LatestVersion)
 	if err != nil {
 		logger.Fatal(err)
 		logger.Close()
@@ -45,8 +45,8 @@ func main() {
 	}
 }
 
-func do(writer io.Writer, latestConfluenceVersion LatestConfluenceVersion) error {
-	version, err := latestConfluenceVersion()
+func do(writer io.Writer, latestVersion LatestVersion) error {
+	version, err := latestVersion()
 	if err != nil {
 		return err
 	}

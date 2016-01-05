@@ -8,11 +8,11 @@ import (
 
 	"fmt"
 
+	"github.com/bborbe/atlassian_utils/confluence"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 	http_client "github.com/bborbe/http/client"
 	"github.com/bborbe/log"
-	"github.com/bborbe/atlassian_utils/confluence"
 )
 
 var logger = log.DefaultLogger

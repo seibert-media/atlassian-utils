@@ -18,10 +18,10 @@ import (
 	http_client "github.com/bborbe/http/client"
 	"github.com/bborbe/log"
 
+	"github.com/bborbe/atlassian_utils/confluence"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
-	"github.com/bborbe/atlassian_utils/confluence"
 )
 
 var logger = log.DefaultLogger
@@ -32,6 +32,7 @@ const (
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
+type LatestVersion func() (string, error)
 
 func main() {
 	defer logger.Close()
@@ -54,11 +55,11 @@ func main() {
 	copier := debian_copier.New()
 	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator)
-	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestConfluenceVersion, creatorByReader.CreatePackage)
+	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 	config_parser := debian_config_parser.New()
 
 	writer := os.Stdout
-	err := do(writer, latestDebianPackageCreator.CreateLatestConfluenceDebianPackage, config_parser, *configPtr)
+	err := do(writer, latestDebianPackageCreator.CreateLatestDebianPackage, config_parser, *configPtr, latestVersion.LatestVersion)
 	if err != nil {
 		logger.Fatal(err)
 		logger.Close()
@@ -66,7 +67,7 @@ func main() {
 	}
 }
 
-func do(writer io.Writer, createPackage CreatePackage, config_parser debian_config_parser.ConfigParser, configpath string) error {
+func do(writer io.Writer, createPackage CreatePackage, config_parser debian_config_parser.ConfigParser, configpath string, latestVersion LatestVersion) error {
 	var err error
 	config := createDefaultConfig()
 	if len(configpath) > 0 {
@@ -76,6 +77,10 @@ func do(writer io.Writer, createPackage CreatePackage, config_parser debian_conf
 	}
 	config_builder := debian_config_builder.NewWithConfig(config)
 	config = config_builder.Build()
+	config.Version, err = latestVersion()
+	if err != nil {
+		return err
+	}
 	sourceDir := fmt.Sprintf("atlassian-confluence-%s", config.Version)
 	targetDir := confluence.TARGET
 	return createPackage(config, sourceDir, targetDir)

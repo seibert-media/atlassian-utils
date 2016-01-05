@@ -9,7 +9,7 @@ import (
 type VersionInformations func() ([]atlassian_information.VersionInformation, error)
 
 type LatestVersion interface {
-	LatestConfluenceVersion() (string, error)
+	LatestVersion() (string, error)
 }
 
 type latestVersion struct {
@@ -22,7 +22,7 @@ func New(versionInformations VersionInformations) *latestVersion {
 	return l
 }
 
-func (l *latestVersion) LatestConfluenceVersion() (string, error) {
+func (l *latestVersion) LatestVersion() (string, error) {
 	infos, err := l.versionInformations()
 	if err != nil {
 		return "", err
