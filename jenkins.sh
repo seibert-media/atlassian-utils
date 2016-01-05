@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SOURCEDIRECTORY="github.com/bborbe/atlassian_utils"
-INSTALLS="github.com/bborbe/atlassian_utils/bin/confluence_create_deb github.com/bborbe/atlassian_utils/bin/confluence_create_latest_deb github.com/bborbe/atlassian_utils/bin/confluence_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/confluence_latest_version"
+INSTALLS="github.com/bborbe/atlassian_utils/bin/bamboo_create_deb github.com/bborbe/atlassian_utils/bin/bamboo_create_latest_deb github.com/bborbe/atlassian_utils/bin/bamboo_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/bamboo_latest_version github.com/bborbe/atlassian_utils/bin/confluence_create_deb github.com/bborbe/atlassian_utils/bin/confluence_create_latest_deb github.com/bborbe/atlassian_utils/bin/confluence_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/confluence_latest_version"
 VERSION="1.0.1-b${BUILD_NUMBER}"
 NAME="atlassian-utils"
 

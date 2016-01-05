@@ -22,6 +22,22 @@
     {
       "source": "bin/confluence_latest_version",
       "target": "/opt/atlassian_utils/bin/confluence_latest_version"
+    },
+    {
+      "source": "bin/bamboo_create_deb",
+      "target": "/opt/atlassian_utils/bin/bamboo_create_deb"
+    },
+    {
+      "source": "bin/bamboo_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/bamboo_create_latest_deb"
+    },
+    {
+      "source": "bin/bamboo_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/bamboo_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/bamboo_latest_version",
+      "target": "/opt/atlassian_utils/bin/bamboo_latest_version"
     }
   ]
 }
