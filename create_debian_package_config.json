@@ -38,6 +38,54 @@
     {
       "source": "bin/bamboo_latest_version",
       "target": "/opt/atlassian_utils/bin/bamboo_latest_version"
+    },
+    {
+      "source": "bin/jira_core_create_deb",
+      "target": "/opt/atlassian_utils/bin/jira_core_create_deb"
+    },
+    {
+      "source": "bin/jira_core_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/jira_core_create_latest_deb"
+    },
+    {
+      "source": "bin/jira_core_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/jira_core_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/jira_core_latest_version",
+      "target": "/opt/atlassian_utils/bin/jira_core_latest_version"
+    },
+    {
+      "source": "bin/jira_servicedesk_create_deb",
+      "target": "/opt/atlassian_utils/bin/jira_servicedesk_create_deb"
+    },
+    {
+      "source": "bin/jira_servicedesk_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/jira_servicedesk_create_latest_deb"
+    },
+    {
+      "source": "bin/jira_servicedesk_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/jira_servicedesk_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/jira_servicedesk_latest_version",
+      "target": "/opt/atlassian_utils/bin/jira_servicedesk_latest_version"
+    },
+    {
+      "source": "bin/jira_software_create_deb",
+      "target": "/opt/atlassian_utils/bin/jira_software_create_deb"
+    },
+    {
+      "source": "bin/jira_software_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/jira_software_create_latest_deb"
+    },
+    {
+      "source": "bin/jira_software_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/jira_software_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/jira_software_latest_version",
+      "target": "/opt/atlassian_utils/bin/jira_software_latest_version"
     }
   ]
 }
