@@ -28,7 +28,7 @@ func (l *latestVersion) LatestConfluenceVersion() (string, error) {
 		return "", err
 	}
 	for _, info := range infos {
-		if info["platform"] == "Unix" {
+		if info["platform"] == "Unix" || info["platform"] == "Mac OS X, Unix" {
 			return info["version"], nil
 		}
 	}

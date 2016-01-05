@@ -37,6 +37,7 @@ func (v *versionInfo) VersionInformations() ([]confluence_information.VersionInf
 	if err != nil {
 		return nil, err
 	}
+	logger.Tracef("json content: %s", string(content))
 	return parseInfos(content)
 }
 
