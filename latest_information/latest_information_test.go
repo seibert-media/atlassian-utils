@@ -7,7 +7,7 @@ import (
 )
 
 func TestImplementsVersionInfo(t *testing.T) {
-	b := New(nil)
+	b := New("", nil)
 	var i *VersionInfo
 	err := AssertThat(b, Implements(i).Message("check type"))
 	if err != nil {

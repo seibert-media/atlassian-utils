@@ -21,6 +21,7 @@ import (
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
+	"github.com/bborbe/atlassian_utils/confluence"
 )
 
 var logger = log.DefaultLogger
@@ -43,7 +44,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClient := http_client.New()
-	latestInformations := atlassian_utils_latest_information.New(httpClient.Get)
+	latestInformations := atlassian_utils_latest_information.New(confluence.JSON_URL, httpClient.Get)
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)
 
@@ -76,13 +77,13 @@ func do(writer io.Writer, createPackage CreatePackage, config_parser debian_conf
 	config_builder := debian_config_builder.NewWithConfig(config)
 	config = config_builder.Build()
 	sourceDir := fmt.Sprintf("atlassian-confluence-%s", config.Version)
-	targetDir := "/opt/confluence"
+	targetDir := confluence.TARGET
 	return createPackage(config, sourceDir, targetDir)
 }
 
 func createDefaultConfig() *debian_config.Config {
 	config := debian_config.DefaultConfig()
-	config.Name = "confluence"
-	config.Architecture = "all"
+	config.Name = confluence.PACKAGE_NAME
+	config.Architecture = confluence.ARCH
 	return config
 }

@@ -16,6 +16,7 @@ import (
 	debian_package_creator_archive "github.com/bborbe/debian_utils/package_creator_archive"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
 	"github.com/bborbe/log"
+	"github.com/bborbe/atlassian_utils/confluence"
 )
 
 var logger = log.DefaultLogger
@@ -77,13 +78,13 @@ func do(writer io.Writer, confluenceDebianPackageCreator debian_package_creator_
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
 	sourceDir := fmt.Sprintf("atlassian-confluence-%s", config.Version)
-	targetDir := "/opt/confluence"
+	targetDir := confluence.TARGET
 	return confluenceDebianPackageCreator.CreatePackage(confluenceTarGzPath, config, sourceDir, targetDir)
 }
 
 func createDefaultConfig() *debian_config.Config {
 	config := debian_config.DefaultConfig()
-	config.Name = "confluence"
-	config.Architecture = "all"
+	config.Name = confluence.PACKAGE_NAME
+	config.Architecture = confluence.ARCH
 	return config
 }

@@ -11,7 +11,7 @@ import (
 
 var logger = log.DefaultLogger
 
-const JSON_URL = "https://my.atlassian.com/download/feeds/current/confluence.json"
+
 
 type Download func(url string) (resp *http.Response, err error)
 
@@ -21,27 +21,29 @@ type VersionInfo interface {
 
 type versionInfo struct {
 	download Download
+	jsonUrl  string
 }
 
-func New(download Download) *versionInfo {
+func New(jsonUrl string, download Download) *versionInfo {
 	v := new(versionInfo)
 	v.download = download
+	v.jsonUrl = jsonUrl
 	return v
 }
 
 func (v *versionInfo) VersionInformations() ([]confluence_information.VersionInformation, error) {
 	logger.Debugf("VersionInformations")
-	content, err := getContent(v.download)
+	content, err := getContent(v.download, v.jsonUrl)
 	if err != nil {
 		return nil, err
 	}
 	return parseInfos(content)
 }
 
-func getContent(download Download) ([]byte, error) {
+func getContent(download Download, jsonUrl string) ([]byte, error) {
 	var resp *http.Response
 	var err error
-	if resp, err = download(JSON_URL); err != nil {
+	if resp, err = download(jsonUrl); err != nil {
 		return nil, err
 	}
 	return ioutil.ReadAll(resp.Body)
