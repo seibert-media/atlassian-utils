@@ -5,11 +5,11 @@ import (
 
 	"strings"
 
-	confluence_information "github.com/bborbe/atlassian_utils/information"
+	atlassian_information "github.com/bborbe/atlassian_utils/information"
 	"github.com/bborbe/log"
 )
 
-type VersionInformations func() ([]confluence_information.VersionInformation, error)
+type VersionInformations func() ([]atlassian_information.VersionInformation, error)
 
 var logger = log.DefaultLogger
 

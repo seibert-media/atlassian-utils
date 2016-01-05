@@ -76,7 +76,7 @@ func do(writer io.Writer, createPackage CreatePackage, config_parser debian_conf
 	}
 	config_builder := debian_config_builder.NewWithConfig(config)
 	config = config_builder.Build()
-	sourceDir := fmt.Sprintf("atlassian-confluence-%s", config.Version)
+	sourceDir := fmt.Sprintf("atlassian-bamboo-%s", config.Version)
 	targetDir := bamboo.TARGET
 	return createPackage(config, sourceDir, targetDir)
 }

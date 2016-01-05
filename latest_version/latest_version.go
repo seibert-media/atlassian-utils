@@ -3,10 +3,10 @@ package latest_version
 import (
 	"fmt"
 
-	confluence_information "github.com/bborbe/atlassian_utils/information"
+	atlassian_information "github.com/bborbe/atlassian_utils/information"
 )
 
-type VersionInformations func() ([]confluence_information.VersionInformation, error)
+type VersionInformations func() ([]atlassian_information.VersionInformation, error)
 
 type LatestVersion interface {
 	LatestConfluenceVersion() (string, error)

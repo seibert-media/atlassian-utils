@@ -33,8 +33,8 @@ type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_bu
 func main() {
 	defer logger.Close()
 	logLevelPtr := flag.String(PARAMETER_LOGLEVEL, log.INFO_STRING, log.FLAG_USAGE)
-	confluenceTarGzPathPtr := flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to confluence tar gz")
-	versionPtr := flag.String(PARAMETER_CONFLUENCE_VERSION, "", "confluence version")
+	tarGzPathPtr := flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to  tar gz")
+	versionPtr := flag.String(PARAMETER_CONFLUENCE_VERSION, "", "version")
 	configPtr := flag.String(PARAMETER_CONFIG, "", "path to config")
 	flag.Parse()
 	logger.SetLevelThreshold(log.LogStringToLevel(*logLevelPtr))
@@ -49,10 +49,10 @@ func main() {
 	copier := debian_copier.New()
 	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator)
-	confluenceDebianPackageCreator := debian_package_creator_archive.New(creatorByReader.CreatePackage)
+	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
 	writer := os.Stdout
-	err := do(writer, confluenceDebianPackageCreator, config_parser, *confluenceTarGzPathPtr, *configPtr, *versionPtr)
+	err := do(writer, debianPackageCreatorArchive, config_parser, *tarGzPathPtr, *configPtr, *versionPtr)
 	if err != nil {
 		logger.Fatal(err)
 		logger.Close()
@@ -60,8 +60,8 @@ func main() {
 	}
 }
 
-func do(writer io.Writer, confluenceDebianPackageCreator debian_package_creator_archive.DebianPackageCreator, config_parser debian_config_parser.ConfigParser, confluenceTarGzPath string, configpath string, version string) error {
-	if len(confluenceTarGzPath) == 0 {
+func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_archive.DebianPackageCreator, config_parser debian_config_parser.ConfigParser, tarGzPath string, configpath string, version string) error {
+	if len(tarGzPath) == 0 {
 		return fmt.Errorf("parameter %s missing", PARAMETER_CONFLUENCE_TAR_GZ_PATH)
 	}
 	var err error
@@ -77,9 +77,9 @@ func do(writer io.Writer, confluenceDebianPackageCreator debian_package_creator_
 	if len(config.Version) == 0 {
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
-	sourceDir := fmt.Sprintf("atlassian-confluence-%s", config.Version)
+	sourceDir := fmt.Sprintf("atlassian-bamboo-%s", config.Version)
 	targetDir := bamboo.TARGET
-	return confluenceDebianPackageCreator.CreatePackage(confluenceTarGzPath, config, sourceDir, targetDir)
+	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
 }
 
 func createDefaultConfig() *debian_config.Config {
