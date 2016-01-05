@@ -1,0 +1,34 @@
+{
+  "name": "atlassian-utils",
+  "section": "utils",
+  "priority": "optional",
+  "architecture": "amd64",
+  "maintainer": "Benjamin Borbe <bborbe@rocketnews.de>",
+  "description": "Atlassian Utils",
+  "postinst": "src/github.com/bborbe/atlassian_utils/postinst",
+  "files": [
+    {
+      "source": "bin/confluence_create_deb",
+      "target": "/opt/atlassian_utils/bin/confluence_create_deb"
+    },
+    {
+      "source": "bin/confluence_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/confluence_create_latest_deb"
+    },
+    {
+      "source": "bin/confluence_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/confluence_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/confluence_latest_version",
+      "target": "/opt/atlassian_utils/bin/confluence_latest_version"
+    }
+  ]
+}
+
+
+
+
+
+
+

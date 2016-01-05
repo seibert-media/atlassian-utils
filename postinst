@@ -1,0 +1,4 @@
+#!/bin/sh
+
+chown -R root:root /opt/atlassian_utils
+find /opt/atlassian_utils -type d -exec chmod 755 "{}" \;
