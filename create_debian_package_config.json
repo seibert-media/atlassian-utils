@@ -8,6 +8,22 @@
   "postinst": "src/github.com/bborbe/atlassian_utils/postinst",
   "files": [
     {
+      "source": "bin/bitbucket_create_deb",
+      "target": "/opt/atlassian_utils/bin/bitbucket_create_deb"
+    },
+    {
+      "source": "bin/bitbucket_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/bitbucket_create_latest_deb"
+    },
+    {
+      "source": "bin/bitbucket_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/bitbucket_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/bitbucket_latest_version",
+      "target": "/opt/atlassian_utils/bin/bitbucket_latest_version"
+    },
+    {
       "source": "bin/atlassian_latest_versions",
       "target": "/opt/atlassian_utils/bin/atlassian_latest_versions"
     },
