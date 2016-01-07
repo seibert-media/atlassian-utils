@@ -8,6 +8,22 @@
   "postinst": "src/github.com/bborbe/atlassian_utils/postinst",
   "files": [
     {
+      "source": "bin/crowd_create_deb",
+      "target": "/opt/atlassian_utils/bin/crowd_create_deb"
+    },
+    {
+      "source": "bin/crowd_create_latest_deb",
+      "target": "/opt/atlassian_utils/bin/crowd_create_latest_deb"
+    },
+    {
+      "source": "bin/crowd_latest_tar_gz_url",
+      "target": "/opt/atlassian_utils/bin/crowd_latest_tar_gz_url"
+    },
+    {
+      "source": "bin/crowd_latest_version",
+      "target": "/opt/atlassian_utils/bin/crowd_latest_version"
+    },
+    {
       "source": "bin/bitbucket_create_deb",
       "target": "/opt/atlassian_utils/bin/bitbucket_create_deb"
     },
