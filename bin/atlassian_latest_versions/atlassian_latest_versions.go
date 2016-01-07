@@ -8,16 +8,17 @@ import (
 
 	"fmt"
 
+	"sort"
+
 	"github.com/bborbe/atlassian_utils/bamboo"
-	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
-	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
-	http_client "github.com/bborbe/http/client"
-	"github.com/bborbe/log"
 	"github.com/bborbe/atlassian_utils/confluence"
 	"github.com/bborbe/atlassian_utils/jira_core"
 	"github.com/bborbe/atlassian_utils/jira_servicedesk"
 	"github.com/bborbe/atlassian_utils/jira_software"
-	"sort"
+	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
+	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
+	http_client "github.com/bborbe/http/client"
+	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
@@ -65,11 +66,11 @@ func main() {
 
 func do(writer io.Writer, bambooLatestVersion LatestVersion, confluenceLatestVersion LatestVersion, jiraCoreLatestVersion LatestVersion, jiraServiceDeskLatestVersion LatestVersion, jiraSoftwareLatestVersion LatestVersion) error {
 	latestVersions := map[string]LatestVersion{
-		"Bamoo":bambooLatestVersion,
-		"Confluence":confluenceLatestVersion,
-		"Jira-Core":jiraCoreLatestVersion,
-		"Jira-ServiceDesk":jiraServiceDeskLatestVersion,
-		"Jira-Software":jiraSoftwareLatestVersion,
+		"Bamoo":            bambooLatestVersion,
+		"Confluence":       confluenceLatestVersion,
+		"Jira-Core":        jiraCoreLatestVersion,
+		"Jira-ServiceDesk": jiraServiceDeskLatestVersion,
+		"Jira-Software":    jiraSoftwareLatestVersion,
 	}
 	list, err := doMap(latestVersions)
 	if err != nil {
