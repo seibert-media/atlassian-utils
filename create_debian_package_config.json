@@ -8,6 +8,10 @@
   "postinst": "src/github.com/bborbe/atlassian_utils/postinst",
   "files": [
     {
+      "source": "bin/atlassian_latest_versions",
+      "target": "/opt/atlassian_utils/bin/atlassian_latest_versions"
+    },
+    {
       "source": "bin/confluence_create_deb",
       "target": "/opt/atlassian_utils/bin/confluence_create_deb"
     },
