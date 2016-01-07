@@ -10,6 +10,8 @@ import (
 
 	"sort"
 
+	"sync"
+
 	"github.com/bborbe/atlassian_utils/bamboo"
 	"github.com/bborbe/atlassian_utils/confluence"
 	"github.com/bborbe/atlassian_utils/jira_core"
@@ -72,25 +74,43 @@ func do(writer io.Writer, bambooLatestVersion LatestVersion, confluenceLatestVer
 		"Jira-ServiceDesk": jiraServiceDeskLatestVersion,
 		"Jira-Software":    jiraSoftwareLatestVersion,
 	}
-	list, err := doMap(latestVersions)
-	if err != nil {
-		return err
-	}
+	list := doMap(latestVersions)
 	sort.Strings(list)
 	for _, result := range list {
-		fmt.Fprintf(writer, result)
+		fmt.Fprintf(writer, "%s\n", result)
 	}
 	return nil
 }
 
-func doMap(latestVersions map[string]LatestVersion) ([]string, error) {
+func doMap(latestVersions map[string]LatestVersion) []string {
+	var wg sync.WaitGroup
 	var list []string
-	for name, version := range latestVersions {
-		version, err := version()
-		if err != nil {
-			return nil, err
+	results := make(chan string)
+	done := make(chan bool)
+	go func() {
+		for result := range results {
+			list = append(list, result)
 		}
-		list = append(list, fmt.Sprintf("%s: %s\n", name, version))
+		done <- true
+	}()
+	for n, v := range latestVersions {
+		wg.Add(1)
+		version := v
+		name := n
+		go func() {
+			version, err := version()
+			if err != nil {
+				logger.Debugf("fetch version failed: %v", err)
+				version = "failed"
+			}
+			results <- fmt.Sprintf("%s: %s", name, version)
+			wg.Done()
+		}()
 	}
-	return list, nil
+	wg.Wait()
+	close(results)
+
+	<-done
+
+	return list
 }
