@@ -13,7 +13,9 @@ import (
 	"sync"
 
 	"github.com/bborbe/atlassian_utils/bamboo"
+	"github.com/bborbe/atlassian_utils/bitbucket"
 	"github.com/bborbe/atlassian_utils/confluence"
+	"github.com/bborbe/atlassian_utils/crowd"
 	"github.com/bborbe/atlassian_utils/jira_core"
 	"github.com/bborbe/atlassian_utils/jira_servicedesk"
 	"github.com/bborbe/atlassian_utils/jira_software"
@@ -57,8 +59,14 @@ func main() {
 	jiraSoftwareLatestInformations := atlassian_utils_latest_information.New(jira_software.JSON_URL, httpClient.Get)
 	jiraSoftwareLatestVersion := atlassian_utils_latest_version.New(jiraSoftwareLatestInformations.VersionInformations)
 
+	bitbucketLatestInformations := atlassian_utils_latest_information.New(bitbucket.JSON_URL, httpClient.Get)
+	bitbucketLatestVersion := atlassian_utils_latest_version.New(bitbucketLatestInformations.VersionInformations)
+
+	crowdLatestInformations := atlassian_utils_latest_information.New(crowd.JSON_URL, httpClient.Get)
+	crowdLatestVersion := atlassian_utils_latest_version.New(crowdLatestInformations.VersionInformations)
+
 	writer := os.Stdout
-	err := do(writer, bambooLatestVersion.LatestVersion, confluenceLatestVersion.LatestVersion, jiraCoreLatestVersion.LatestVersion, jiraServiceDeskLatestVersion.LatestVersion, jiraSoftwareLatestVersion.LatestVersion)
+	err := do(writer, bambooLatestVersion.LatestVersion, confluenceLatestVersion.LatestVersion, jiraCoreLatestVersion.LatestVersion, jiraServiceDeskLatestVersion.LatestVersion, jiraSoftwareLatestVersion.LatestVersion, bitbucketLatestVersion.LatestVersion, crowdLatestVersion.LatestVersion)
 	if err != nil {
 		logger.Fatal(err)
 		logger.Close()
@@ -66,13 +74,15 @@ func main() {
 	}
 }
 
-func do(writer io.Writer, bambooLatestVersion LatestVersion, confluenceLatestVersion LatestVersion, jiraCoreLatestVersion LatestVersion, jiraServiceDeskLatestVersion LatestVersion, jiraSoftwareLatestVersion LatestVersion) error {
+func do(writer io.Writer, bambooLatestVersion LatestVersion, confluenceLatestVersion LatestVersion, jiraCoreLatestVersion LatestVersion, jiraServiceDeskLatestVersion LatestVersion, jiraSoftwareLatestVersion LatestVersion, bitbucketLatestVersion LatestVersion, crowdLatestVersion LatestVersion) error {
 	latestVersions := map[string]LatestVersion{
 		"Bamoo":            bambooLatestVersion,
 		"Confluence":       confluenceLatestVersion,
 		"Jira-Core":        jiraCoreLatestVersion,
 		"Jira-ServiceDesk": jiraServiceDeskLatestVersion,
 		"Jira-Software":    jiraSoftwareLatestVersion,
+		"Bitbucket":        bitbucketLatestVersion,
+		"Crowd":            crowdLatestVersion,
 	}
 	list := doMap(latestVersions)
 	sort.Strings(list)
