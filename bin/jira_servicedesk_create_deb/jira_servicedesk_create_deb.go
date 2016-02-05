@@ -16,17 +16,17 @@ import (
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_archive "github.com/bborbe/debian_utils/package_creator_archive"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-	"github.com/bborbe/log"
 	"github.com/bborbe/debian_utils/tar_gz_extractor"
+	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
 
 const (
-	PARAMETER_LOGLEVEL = "loglevel"
-	PARAMETER_CONFIG = "config"
+	PARAMETER_LOGLEVEL               = "loglevel"
+	PARAMETER_CONFIG                 = "config"
 	PARAMETER_CONFLUENCE_TAR_GZ_PATH = "path"
-	PARAMETER_CONFLUENCE_VERSION = "version"
+	PARAMETER_CONFLUENCE_VERSION     = "version"
 )
 
 type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_builder.ConfigBuilder

@@ -29,7 +29,7 @@ var logger = log.DefaultLogger
 
 const (
 	PARAMETER_LOGLEVEL = "loglevel"
-	PARAMETER_CONFIG = "config"
+	PARAMETER_CONFIG   = "config"
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
