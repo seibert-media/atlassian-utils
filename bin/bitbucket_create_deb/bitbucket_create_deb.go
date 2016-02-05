@@ -17,15 +17,16 @@ import (
 	debian_package_creator_archive "github.com/bborbe/debian_utils/package_creator_archive"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
 	"github.com/bborbe/log"
+	"github.com/bborbe/debian_utils/tar_gz_extractor"
 )
 
 var logger = log.DefaultLogger
 
 const (
-	PARAMETER_LOGLEVEL               = "loglevel"
-	PARAMETER_CONFIG                 = "config"
+	PARAMETER_LOGLEVEL = "loglevel"
+	PARAMETER_CONFIG = "config"
 	PARAMETER_CONFLUENCE_TAR_GZ_PATH = "path"
-	PARAMETER_CONFLUENCE_VERSION     = "version"
+	PARAMETER_CONFLUENCE_VERSION = "version"
 )
 
 type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_builder.ConfigBuilder
@@ -48,7 +49,8 @@ func main() {
 	config_parser := debian_config_parser.New()
 	copier := debian_copier.New()
 	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
-	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator)
+	extractor := tar_gz_extractor.New()
+	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, extractor.ExtractTarGz)
 	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
 	writer := os.Stdout

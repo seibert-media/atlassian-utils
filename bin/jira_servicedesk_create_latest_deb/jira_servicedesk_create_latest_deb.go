@@ -22,13 +22,14 @@ import (
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
+	"github.com/bborbe/debian_utils/tar_gz_extractor"
 )
 
 var logger = log.DefaultLogger
 
 const (
 	PARAMETER_LOGLEVEL = "loglevel"
-	PARAMETER_CONFIG   = "config"
+	PARAMETER_CONFIG = "config"
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
@@ -54,7 +55,8 @@ func main() {
 	}
 	copier := debian_copier.New()
 	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
-	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator)
+	extractor := tar_gz_extractor.New()
+	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, extractor.ExtractTarGz)
 	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 	config_parser := debian_config_parser.New()
 
