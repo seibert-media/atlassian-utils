@@ -15,8 +15,8 @@ import (
 	debian_latest_package_creator "github.com/bborbe/debian_utils/latest_package_creator"
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-	http_client "github.com/bborbe/http/client"
- 	http_client_builder "github.com/bborbe/http/client/builder"
+
+ 	http_client_builder "github.com/bborbe/http/client_builder"
  	"github.com/bborbe/log"
 
 	"github.com/bborbe/atlassian_utils/bitbucket"
@@ -47,7 +47,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClientBuilder := http_client_builder.New()
-	httpClient := http_client.New(httpClientBuilder.Build())
+	httpClient := httpClientBuilder.Build()
 	latestInformations := atlassian_utils_latest_information.New(bitbucket.JSON_URL, httpClient.Get)
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)

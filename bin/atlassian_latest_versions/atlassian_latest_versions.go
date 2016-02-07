@@ -17,8 +17,8 @@ import (
 	"github.com/bborbe/atlassian_utils/jira_software"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
-	http_client "github.com/bborbe/http/client"
-	http_client_builder "github.com/bborbe/http/client/builder"
+
+	http_client_builder "github.com/bborbe/http/client_builder"
 	"github.com/bborbe/log"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClientBuilder := http_client_builder.New()
-	httpClient := http_client.New(httpClientBuilder.Build())
+	httpClient := httpClientBuilder.Build()
 
 	bambooLatestInformations := atlassian_utils_latest_information.New(bamboo.JSON_URL, httpClient.Get)
 	bambooLatestVersion := atlassian_utils_latest_version.New(bambooLatestInformations.VersionInformations)

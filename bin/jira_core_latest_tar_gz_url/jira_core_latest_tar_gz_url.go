@@ -11,8 +11,8 @@ import (
 	"github.com/bborbe/atlassian_utils/jira_core"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
-	http_client "github.com/bborbe/http/client"
- 	http_client_builder "github.com/bborbe/http/client/builder"
+
+ 	http_client_builder "github.com/bborbe/http/client_builder"
  	"github.com/bborbe/log"
 )
 
@@ -34,7 +34,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClientBuilder := http_client_builder.New()
-	httpClient := http_client.New(httpClientBuilder.Build())
+	httpClient := httpClientBuilder.Build()
 	latestInformations := atlassian_utils_latest_information.New(jira_core.JSON_URL, httpClient.Get)
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 
