@@ -2,12 +2,13 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io"
 	"os"
 	"runtime"
-	"fmt"
 	"sort"
 	"sync"
+
 	"github.com/bborbe/atlassian_utils/bamboo"
 	"github.com/bborbe/atlassian_utils/bitbucket"
 	"github.com/bborbe/atlassian_utils/confluence"

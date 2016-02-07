@@ -12,8 +12,8 @@ import (
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
 
- 	http_client_builder "github.com/bborbe/http/client_builder"
- 	"github.com/bborbe/log"
+	http_client_builder "github.com/bborbe/http/client_builder"
+	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
