@@ -12,7 +12,8 @@ import (
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 	http_client "github.com/bborbe/http/client"
-	"github.com/bborbe/log"
+ 	http_client_builder "github.com/bborbe/http/client/builder"
+ 	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
@@ -32,7 +33,8 @@ func main() {
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	httpClient := http_client.New()
+	httpClientBuilder := http_client_builder.New()
+	httpClient := http_client.New(httpClientBuilder.Build())
 	latestInformations := atlassian_utils_latest_information.New(bamboo.JSON_URL, httpClient.Get)
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 

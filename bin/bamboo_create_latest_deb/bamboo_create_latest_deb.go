@@ -15,9 +15,8 @@ import (
 	debian_latest_package_creator "github.com/bborbe/debian_utils/latest_package_creator"
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-	http_client "github.com/bborbe/http/client"
+	http_client "github.com/bborbe/http/client" 	http_client_builder "github.com/bborbe/http/client/builder" 	http_client_builder "github.com/bborbe/http/client/builder"
 	"github.com/bborbe/log"
-
 	"github.com/bborbe/atlassian_utils/bamboo"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
@@ -45,7 +44,8 @@ func main() {
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	httpClient := http_client.New()
+	httpClientBuilder := http_client_builder.New()
+	httpClient := http_client.New(httpClientBuilder.Build())
 	latestInformations := atlassian_utils_latest_information.New(bamboo.JSON_URL, httpClient.Get)
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)

@@ -12,7 +12,8 @@ import (
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
 	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
 	http_client "github.com/bborbe/http/client"
-	"github.com/bborbe/log"
+ 	http_client_builder "github.com/bborbe/http/client/builder"
+ 	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
@@ -32,7 +33,8 @@ func main() {
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	httpClient := http_client.New()
+	httpClientBuilder := http_client_builder.New()
+	httpClient := http_client.New(httpClientBuilder.Build())
 	latestInformations := atlassian_utils_latest_information.New(confluence.JSON_URL, httpClient.Get)
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)
 
