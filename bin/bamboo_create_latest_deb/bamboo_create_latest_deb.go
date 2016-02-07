@@ -15,7 +15,8 @@ import (
 	debian_latest_package_creator "github.com/bborbe/debian_utils/latest_package_creator"
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-	http_client "github.com/bborbe/http/client" 	http_client_builder "github.com/bborbe/http/client/builder" 	http_client_builder "github.com/bborbe/http/client/builder"
+	http_client "github.com/bborbe/http/client"
+	http_client_builder "github.com/bborbe/http/client/builder"
 	"github.com/bborbe/log"
 	"github.com/bborbe/atlassian_utils/bamboo"
 	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
@@ -28,7 +29,7 @@ var logger = log.DefaultLogger
 
 const (
 	PARAMETER_LOGLEVEL = "loglevel"
-	PARAMETER_CONFIG   = "config"
+	PARAMETER_CONFIG = "config"
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
