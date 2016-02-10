@@ -5,13 +5,14 @@ import (
 
 	"fmt"
 
+	"bytes"
+
 	. "github.com/bborbe/assert"
-	io_mock "github.com/bborbe/io/mock"
 )
 
 func TestDoFail(t *testing.T) {
 	var err error
-	writer := io_mock.NewWriter()
+	writer := bytes.NewBufferString("")
 	err = do(writer, func() (string, error) {
 		return "", fmt.Errorf("fail")
 	})
@@ -23,7 +24,7 @@ func TestDoFail(t *testing.T) {
 
 func TestDoSuccess(t *testing.T) {
 	var err error
-	writer := io_mock.NewWriter()
+	writer := bytes.NewBufferString("")
 	err = do(writer, func() (string, error) {
 		return "1.2.3", nil
 	})
@@ -31,7 +32,7 @@ func TestDoSuccess(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err = AssertThat(string(writer.Content()), Is("1.2.3\n")); err != nil {
+	if err = AssertThat(writer.String(), Is("1.2.3\n")); err != nil {
 		t.Fatal(err)
 	}
 }
