@@ -1,7 +1,6 @@
 #!/bin/sh
 
 SOURCEDIRECTORY="github.com/bborbe/atlassian_utils"
-INSTALLS="github.com/bborbe/atlassian_utils/bin/atlassian_latest_versions github.com/bborbe/atlassian_utils/bin/bamboo_create_deb github.com/bborbe/atlassian_utils/bin/bamboo_create_latest_deb github.com/bborbe/atlassian_utils/bin/bamboo_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/bamboo_latest_version github.com/bborbe/atlassian_utils/bin/confluence_create_deb github.com/bborbe/atlassian_utils/bin/confluence_create_latest_deb github.com/bborbe/atlassian_utils/bin/confluence_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/confluence_latest_version github.com/bborbe/atlassian_utils/bin/jira_core_create_deb github.com/bborbe/atlassian_utils/bin/jira_core_create_latest_deb github.com/bborbe/atlassian_utils/bin/jira_core_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/jira_core_latest_version github.com/bborbe/atlassian_utils/bin/jira_servicedesk_create_deb github.com/bborbe/atlassian_utils/bin/jira_servicedesk_create_latest_deb github.com/bborbe/atlassian_utils/bin/jira_servicedesk_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/jira_servicedesk_latest_version github.com/bborbe/atlassian_utils/bin/jira_software_create_deb github.com/bborbe/atlassian_utils/bin/jira_software_create_latest_deb github.com/bborbe/atlassian_utils/bin/jira_software_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/jira_software_latest_version github.com/bborbe/atlassian_utils/bin/bitbucket_create_deb github.com/bborbe/atlassian_utils/bin/bitbucket_create_latest_deb github.com/bborbe/atlassian_utils/bin/bitbucket_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/bitbucket_latest_version github.com/bborbe/atlassian_utils/bin/crowd_create_deb github.com/bborbe/atlassian_utils/bin/crowd_create_latest_deb github.com/bborbe/atlassian_utils/bin/crowd_latest_tar_gz_url github.com/bborbe/atlassian_utils/bin/crowd_latest_version"
 VERSION="1.0.1-b${BUILD_NUMBER}"
 NAME="atlassian-utils"
 
@@ -11,6 +10,7 @@ export GOROOT=/opt/go
 export PATH=/opt/go2xunit/bin/:/opt/utils/bin/:/opt/aptly_utils/bin/:/opt/aptly/bin/:/opt/debian_utils/bin/:/opt/debian/bin/:$GOROOT/bin:$PATH
 export GOPATH=${WORKSPACE}
 export REPORT_DIR=${WORKSPACE}/test-reports
+INSTALLS=`cd src && find $SOURCEDIRECTORY/bin -name "*.go" | dirof | unique`
 DEB="${NAME}_${VERSION}.deb"
 rm -rf $REPORT_DIR ${WORKSPACE}/*.deb ${WORKSPACE}/pkg
 mkdir -p $REPORT_DIR
