@@ -62,9 +62,39 @@ Package provide some atlassian utils
 
 `go get github.com/bborbe/atlassian_utils/bin/jira_software_latest_version`
 
-## Documentation
+## Create Confluence Debian Package
 
-http://godoc.org/github.com/bborbe/atlassian_utils/
+```
+confluence_create_deb \
+-loglevel DEBUG \
+-config confluence-config.json \
+-path atlassian-confluence-5.9.5.tar.gz \
+-version 5.9.5
+```
+Sample confluence.json
+
+```
+{
+  "name": "confluence",
+  "section": "utils",
+  "priority": "optional",
+  "architecture": "all",
+  "maintainer": "Benjamin Borbe <bborbe@rocketnews.de>",
+  "description": "Confluence",
+  "postinst": "src/github.com/bborbe/confluence/postinst",
+  "postrm": "src/github.com/bborbe/confluence/postrm",
+  "prerm": "src/github.com/bborbe/confluence/prerm",
+  "depends": [
+    "oracle-java8-installer"
+  ],
+  "files": [
+    {
+      "source": "src/github.com/bborbe/confluence/etc/init.d/confluence",
+      "target": "/etc/init.d/confluence"
+    }
+  ]
+}
+```
 
 ## Continuous integration
 
