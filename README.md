@@ -98,7 +98,7 @@ Sample confluence.json
 
 ## Continuous integration
 
-https://www.benjamin-borbe.de/jenkins/job/Go-Atlassian-Utils/
+[Jenkins](https://www.benjamin-borbe.de/jenkins/job/Go-Atlassian-Utils/)
 
 ## Copyright and license
 
