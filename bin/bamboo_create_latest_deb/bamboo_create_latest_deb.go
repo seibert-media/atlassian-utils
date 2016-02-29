@@ -7,6 +7,10 @@ import (
 	"os"
 	"runtime"
 
+	"github.com/bborbe/atlassian_utils/bamboo"
+	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
+	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
+	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
 	command_list "github.com/bborbe/command/list"
 	debian_config "github.com/bborbe/debian_utils/config"
 	debian_config_builder "github.com/bborbe/debian_utils/config_builder"
@@ -15,13 +19,10 @@ import (
 	debian_latest_package_creator "github.com/bborbe/debian_utils/latest_package_creator"
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-
-	"github.com/bborbe/atlassian_utils/bamboo"
-	atlassian_utils_latest_information "github.com/bborbe/atlassian_utils/latest_information"
-	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
-	atlassian_utils_latest_version "github.com/bborbe/atlassian_utils/latest_version"
-	"github.com/bborbe/debian_utils/tar_gz_extractor"
+	debian_tar_gz_extractor "github.com/bborbe/debian_utils/tar_gz_extractor"
+	debian_zip_extractor "github.com/bborbe/debian_utils/zip_extractor"
 	http_client_builder "github.com/bborbe/http/client_builder"
+	http_requestbuilder "github.com/bborbe/http/requestbuilder"
 	"github.com/bborbe/log"
 )
 
@@ -54,12 +55,14 @@ func main() {
 	commandListProvider := func() command_list.CommandList {
 		return command_list.New()
 	}
-	copier := debian_copier.New()
-	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
-	extractor := tar_gz_extractor.New()
-	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, extractor.ExtractTarGz)
-	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 	config_parser := debian_config_parser.New()
+	copier := debian_copier.New()
+	zipExtractor := debian_zip_extractor.New()
+	tarGzExtractor := debian_tar_gz_extractor.New()
+	requestbuilderProvider := http_requestbuilder.NewHttpRequestBuilderProvider()
+	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHttpRequestBuilder)
+	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
+	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 
 	writer := os.Stdout
 	err := do(writer, latestDebianPackageCreator.CreateLatestDebianPackage, config_parser, *configPtr, latestVersion.LatestVersion)

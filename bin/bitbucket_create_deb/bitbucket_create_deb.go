@@ -16,7 +16,10 @@ import (
 	debian_package_creator "github.com/bborbe/debian_utils/package_creator"
 	debian_package_creator_archive "github.com/bborbe/debian_utils/package_creator_archive"
 	debian_package_creator_by_reader "github.com/bborbe/debian_utils/package_creator_by_reader"
-	"github.com/bborbe/debian_utils/tar_gz_extractor"
+	debian_tar_gz_extractor "github.com/bborbe/debian_utils/tar_gz_extractor"
+	debian_zip_extractor "github.com/bborbe/debian_utils/zip_extractor"
+	http_client_builder "github.com/bborbe/http/client_builder"
+	http_requestbuilder "github.com/bborbe/http/requestbuilder"
 	"github.com/bborbe/log"
 )
 
@@ -48,9 +51,13 @@ func main() {
 	}
 	config_parser := debian_config_parser.New()
 	copier := debian_copier.New()
-	debianPackageCreator := debian_package_creator.New(commandListProvider, copier)
-	extractor := tar_gz_extractor.New()
-	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, extractor.ExtractTarGz)
+	zipExtractor := debian_zip_extractor.New()
+	tarGzExtractor := debian_tar_gz_extractor.New()
+	httpClientBuilder := http_client_builder.New().WithoutProxy()
+	httpClient := httpClientBuilder.Build()
+	requestbuilderProvider := http_requestbuilder.NewHttpRequestBuilderProvider()
+	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHttpRequestBuilder)
+	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
 	writer := os.Stdout
