@@ -1,0 +1,24 @@
+package: github.com/bborbe/atlassian_utils
+import:
+- package: github.com/bborbe/command
+  subpackages:
+  - list
+- package: github.com/bborbe/debian_utils
+  subpackages:
+  - config
+  - config_builder
+  - config_parser
+  - copier
+  - latest_package_creator
+  - package_creator
+  - package_creator_archive
+  - package_creator_by_reader
+  - tar_gz_extractor
+  - zip_extractor
+- package: github.com/bborbe/http
+  subpackages:
+  - client_builder
+  - requestbuilder
+- package: github.com/bborbe/log
+testImport:
+- package: github.com/bborbe/assert
