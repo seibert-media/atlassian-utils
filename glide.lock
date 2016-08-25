@@ -1,13 +1,13 @@
 hash: 48a2f5a64626ef481fedf983e737718bc9d9e42fb1faaf0e03d7cfb7f921e903
-updated: 2016-08-24T22:50:35.609007459+02:00
+updated: 2016-08-25T20:04:33.677358893+02:00
 imports:
 - name: github.com/bborbe/command
-  version: 910fd173982921ca7050433557d169e1414e8f1f
+  version: 43b0e2734793f90303cd609bd9409188f271a96b
   subpackages:
   - list
   - adapter
 - name: github.com/bborbe/debian_utils
-  version: 20dd614e025077141e205721b0159b88c03f5fb9
+  version: 3cab8cf6d8c502bbb49f9dd2ad924ffe1f0f7733
   subpackages:
   - config
   - config_builder
@@ -20,12 +20,12 @@ imports:
   - tar_gz_extractor
   - zip_extractor
 - name: github.com/bborbe/http
-  version: ba3b05652664169dbef4c3c1c326db4929b0cec2
+  version: 1a08a16fd2cc75228b32afadd7126f7372cb4780
   subpackages:
   - client_builder
   - requestbuilder
 - name: github.com/bborbe/io
-  version: 56d91e8345e4418981a56bc4b8466b4096138f08
+  version: a92503d8d6377ff0e8b24ad2007cc83546a50817
   subpackages:
   - buffered_writer
   - util
@@ -33,4 +33,4 @@ imports:
   version: 0250bb5b2e2bd833cb9a47333c28aa46751cdbfe
 testImports:
 - name: github.com/bborbe/assert
-  version: cd6d0ec67c40ced8ca6cf72773b9e4b44420fbd2
+  version: f767bd2fffab5a86d5a887e2415d399e8aade8bf
