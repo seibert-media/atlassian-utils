@@ -32,7 +32,7 @@ func TestDoSuccess(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err = AssertThat(writer.String(), Is("1.2.3\n")); err != nil {
+	if err := AssertThat(writer.String(), Is("1.2.3\n")); err != nil {
 		t.Fatal(err)
 	}
 }

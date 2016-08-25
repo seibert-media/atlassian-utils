@@ -55,8 +55,8 @@ func main() {
 	tarGzExtractor := debian_tar_gz_extractor.New()
 	httpClientBuilder := http_client_builder.New().WithoutProxy()
 	httpClient := httpClientBuilder.Build()
-	requestbuilderProvider := http_requestbuilder.NewHttpRequestBuilderProvider()
-	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHttpRequestBuilder)
+	requestbuilderProvider := http_requestbuilder.NewHTTPRequestBuilderProvider()
+	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHTTPRequestBuilder)
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
@@ -81,7 +81,9 @@ func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_arc
 		}
 	}
 	config_builder := debian_config_builder.NewWithConfig(config)
-	config_builder.Version(version)
+	if err := config_builder.Version(version); err != nil {
+		return err
+	}
 	config = config_builder.Build()
 	if len(config.Version) == 0 {
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)

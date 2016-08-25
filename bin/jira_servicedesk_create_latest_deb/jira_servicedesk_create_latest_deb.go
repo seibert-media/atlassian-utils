@@ -59,8 +59,8 @@ func main() {
 	copier := debian_copier.New()
 	zipExtractor := debian_zip_extractor.New()
 	tarGzExtractor := debian_tar_gz_extractor.New()
-	requestbuilderProvider := http_requestbuilder.NewHttpRequestBuilderProvider()
-	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHttpRequestBuilder)
+	requestbuilderProvider := http_requestbuilder.NewHTTPRequestBuilderProvider()
+	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHTTPRequestBuilder)
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 
