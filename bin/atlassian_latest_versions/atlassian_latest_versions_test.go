@@ -9,7 +9,6 @@ import (
 )
 
 func TestDoFail(t *testing.T) {
-	var err error
 	list := doMap(map[string]LatestVersion{"Test": func() (string, error) {
 		return "", fmt.Errorf("foo")
 	}})
@@ -22,7 +21,6 @@ func TestDoFail(t *testing.T) {
 }
 
 func TestDoSuccess(t *testing.T) {
-	var err error
 	list := doMap(map[string]LatestVersion{"Test": func() (string, error) {
 		return "1.2.3", nil
 	}})
