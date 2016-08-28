@@ -19,6 +19,6 @@ import:
   subpackages:
   - client_builder
   - requestbuilder
-- package: github.com/bborbe/log
+- package: github.com/golang/glog
 testImport:
 - package: github.com/bborbe/assert

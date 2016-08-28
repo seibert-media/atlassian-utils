@@ -6,12 +6,10 @@ import (
 	"strings"
 
 	atlassian_information "github.com/bborbe/atlassian_utils/information"
-	"github.com/bborbe/log"
+	"github.com/golang/glog"
 )
 
 type VersionInformations func() ([]atlassian_information.VersionInformation, error)
-
-var logger = log.DefaultLogger
 
 type LatestConfluenceTarGzUrl interface {
 	LatestConfluenceTarGzUrl() (string, error)
@@ -28,7 +26,7 @@ func New(versionInformations VersionInformations) *latestConfluenceTarGzUrl {
 }
 
 func (l *latestConfluenceTarGzUrl) LatestConfluenceTarGzUrl() (string, error) {
-	logger.Debugf("LatestConfluenceTarGzUrl")
+	glog.V(2).Infof("LatestConfluenceTarGzUrl")
 	infos, err := l.versionInformations()
 	if err != nil {
 		return "", err

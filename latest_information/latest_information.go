@@ -6,10 +6,8 @@ import (
 	"net/http"
 
 	atlassian_information "github.com/bborbe/atlassian_utils/information"
-	"github.com/bborbe/log"
+	"github.com/golang/glog"
 )
-
-var logger = log.DefaultLogger
 
 type Download func(url string) (resp *http.Response, err error)
 
@@ -30,12 +28,12 @@ func New(jsonUrl string, download Download) *versionInfo {
 }
 
 func (v *versionInfo) VersionInformations() ([]atlassian_information.VersionInformation, error) {
-	logger.Debugf("VersionInformations")
+	glog.V(2).Infof("VersionInformations")
 	content, err := getContent(v.download, v.jsonUrl)
 	if err != nil {
 		return nil, err
 	}
-	logger.Tracef("json content: %s", string(content))
+	glog.V(4).Infof("json content: %s", string(content))
 	return parseInfos(content)
 }
 

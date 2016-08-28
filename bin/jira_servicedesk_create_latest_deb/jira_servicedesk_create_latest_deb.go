@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
-	"os"
 	"runtime"
 
 	"github.com/bborbe/atlassian_utils/jira_servicedesk"
@@ -23,27 +21,24 @@ import (
 	debian_zip_extractor "github.com/bborbe/debian_utils/zip_extractor"
 	http_client_builder "github.com/bborbe/http/client_builder"
 	http_requestbuilder "github.com/bborbe/http/requestbuilder"
-	"github.com/bborbe/log"
+	"github.com/golang/glog"
 )
 
-var logger = log.DefaultLogger
-
 const (
-	PARAMETER_LOGLEVEL = "loglevel"
-	PARAMETER_CONFIG   = "config"
+	PARAMETER_CONFIG = "config"
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
 type LatestVersion func() (string, error)
 
-func main() {
-	defer logger.Close()
-	logLevelPtr := flag.String(PARAMETER_LOGLEVEL, log.INFO_STRING, log.FLAG_USAGE)
-	configPtr := flag.String(PARAMETER_CONFIG, "", "path to config")
-	flag.Parse()
-	logger.SetLevelThreshold(log.LogStringToLevel(*logLevelPtr))
-	logger.Debugf("set log level to %s", *logLevelPtr)
+var (
+	configPtr = flag.String(PARAMETER_CONFIG, "", "path to config")
+)
 
+func main() {
+	defer glog.Flush()
+	glog.CopyStandardLogTo("info")
+	flag.Parse()
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClientBuilder := http_client_builder.New()
@@ -64,16 +59,13 @@ func main() {
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 
-	writer := os.Stdout
-	err := do(writer, latestDebianPackageCreator.CreateLatestDebianPackage, config_parser, *configPtr, latestVersion.LatestVersion)
+	err := do(latestDebianPackageCreator.CreateLatestDebianPackage, config_parser, *configPtr, latestVersion.LatestVersion)
 	if err != nil {
-		logger.Fatal(err)
-		logger.Close()
-		os.Exit(1)
+		glog.Exit(err)
 	}
 }
 
-func do(writer io.Writer, createPackage CreatePackage, config_parser debian_config_parser.ConfigParser, configpath string, latestVersion LatestVersion) error {
+func do(createPackage CreatePackage, config_parser debian_config_parser.ConfigParser, configpath string, latestVersion LatestVersion) error {
 	var err error
 	config := createDefaultConfig()
 	if len(configpath) > 0 {

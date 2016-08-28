@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
-	"os"
 	"runtime"
 
 	"github.com/bborbe/atlassian_utils/crowd"
@@ -20,13 +18,10 @@ import (
 	debian_zip_extractor "github.com/bborbe/debian_utils/zip_extractor"
 	http_client_builder "github.com/bborbe/http/client_builder"
 	http_requestbuilder "github.com/bborbe/http/requestbuilder"
-	"github.com/bborbe/log"
+	"github.com/golang/glog"
 )
 
-var logger = log.DefaultLogger
-
 const (
-	PARAMETER_LOGLEVEL               = "loglevel"
 	PARAMETER_CONFIG                 = "config"
 	PARAMETER_CONFLUENCE_TAR_GZ_PATH = "path"
 	PARAMETER_CONFLUENCE_VERSION     = "version"
@@ -34,16 +29,16 @@ const (
 
 type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_builder.ConfigBuilder
 
-func main() {
-	defer logger.Close()
-	logLevelPtr := flag.String(PARAMETER_LOGLEVEL, log.INFO_STRING, log.FLAG_USAGE)
-	tarGzPathPtr := flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to  tar gz")
-	versionPtr := flag.String(PARAMETER_CONFLUENCE_VERSION, "", "version")
-	configPtr := flag.String(PARAMETER_CONFIG, "", "path to config")
-	flag.Parse()
-	logger.SetLevelThreshold(log.LogStringToLevel(*logLevelPtr))
-	logger.Debugf("set log level to %s", *logLevelPtr)
+var (
+	tarGzPathPtr = flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to  tar gz")
+	versionPtr   = flag.String(PARAMETER_CONFLUENCE_VERSION, "", "version")
+	configPtr    = flag.String(PARAMETER_CONFIG, "", "path to config")
+)
 
+func main() {
+	defer glog.Flush()
+	glog.CopyStandardLogTo("info")
+	flag.Parse()
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	commandListProvider := func() command_list.CommandList {
@@ -60,16 +55,13 @@ func main() {
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
-	writer := os.Stdout
-	err := do(writer, debianPackageCreatorArchive, config_parser, *tarGzPathPtr, *configPtr, *versionPtr)
+	err := do(debianPackageCreatorArchive, config_parser, *tarGzPathPtr, *configPtr, *versionPtr)
 	if err != nil {
-		logger.Fatal(err)
-		logger.Close()
-		os.Exit(1)
+		glog.Exit(err)
 	}
 }
 
-func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_archive.DebianPackageCreator, config_parser debian_config_parser.ConfigParser, tarGzPath string, configpath string, version string) error {
+func do(debianPackageCreatorArchive debian_package_creator_archive.DebianPackageCreator, config_parser debian_config_parser.ConfigParser, tarGzPath string, configpath string, version string) error {
 	if len(tarGzPath) == 0 {
 		return fmt.Errorf("parameter %s missing", PARAMETER_CONFLUENCE_TAR_GZ_PATH)
 	}

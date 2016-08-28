@@ -13,24 +13,15 @@ import (
 	atlassian_utils_latest_tar_gz_url "github.com/bborbe/atlassian_utils/latest_tar_gz_url"
 
 	http_client_builder "github.com/bborbe/http/client_builder"
-	"github.com/bborbe/log"
-)
-
-var logger = log.DefaultLogger
-
-const (
-	PARAMETER_LOGLEVEL = "loglevel"
+	"github.com/golang/glog"
 )
 
 type LatestUrl func() (string, error)
 
 func main() {
-	defer logger.Close()
-	logLevelPtr := flag.String(PARAMETER_LOGLEVEL, log.INFO_STRING, log.FLAG_USAGE)
+	defer glog.Flush()
+	glog.CopyStandardLogTo("info")
 	flag.Parse()
-	logger.SetLevelThreshold(log.LogStringToLevel(*logLevelPtr))
-	logger.Debugf("set log level to %s", *logLevelPtr)
-
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	httpClientBuilder := http_client_builder.New()
@@ -41,10 +32,9 @@ func main() {
 	writer := os.Stdout
 	err := do(writer, latestUrl.LatestConfluenceTarGzUrl)
 	if err != nil {
-		logger.Fatal(err)
-		logger.Close()
-		os.Exit(1)
+		glog.Exit(err)
 	}
+
 }
 
 func do(writer io.Writer, latestUrl LatestUrl) error {
