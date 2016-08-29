@@ -73,8 +73,10 @@ func do(debianPackageCreatorArchive debian_package_creator_archive.DebianPackage
 		}
 	}
 	config_builder := debian_config_builder.NewWithConfig(config)
-	if err := config_builder.Version(version); err != nil {
-		return err
+	if len(version) > 0 {
+		if err := config_builder.Version(version); err != nil {
+			return err
+		}
 	}
 	config = config_builder.Build()
 	if len(config.Version) == 0 {
