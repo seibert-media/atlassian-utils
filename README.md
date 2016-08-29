@@ -66,7 +66,8 @@ Package provide some atlassian utils
 
 ```
 confluence_create_deb \
--loglevel DEBUG \
+-logtostderr \
+-v=2 \
 -config confluence-config.json \
 -path atlassian-confluence-5.9.5.tar.gz \
 -version 5.9.5
