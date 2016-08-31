@@ -15,7 +15,7 @@ func TestDo(t *testing.T) {
 		return fmt.Errorf("foo")
 	}, nil, "", func() (string, error) {
 		return "1.2.3", nil
-	})
+	}, "")
 	err = AssertThat(err, NotNilValue())
 	if err != nil {
 		t.Fatal(err)

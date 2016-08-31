@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
-	"os"
 	"runtime"
 
 	"github.com/bborbe/atlassian_utils/bamboo"
@@ -27,12 +25,14 @@ const (
 	PARAMETER_CONFIG                 = "config"
 	PARAMETER_CONFLUENCE_TAR_GZ_PATH = "path"
 	PARAMETER_CONFLUENCE_VERSION     = "version"
+	PARAMETER_TARGET                 = "target"
 )
 
 var (
 	tarGzPathPtr = flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to  tar gz")
 	versionPtr   = flag.String(PARAMETER_CONFLUENCE_VERSION, "", "version")
 	configPtr    = flag.String(PARAMETER_CONFIG, "", "path to config")
+	targetDirPtr = flag.String(PARAMETER_TARGET, bamboo.TARGET, "target")
 )
 
 type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_builder.ConfigBuilder
@@ -57,14 +57,27 @@ func main() {
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	debianPackageCreatorArchive := debian_package_creator_archive.New(creatorByReader.CreatePackage)
 
-	writer := os.Stdout
-	err := do(writer, debianPackageCreatorArchive, config_parser, *tarGzPathPtr, *configPtr, *versionPtr)
+	err := do(
+		debianPackageCreatorArchive,
+		config_parser,
+		*tarGzPathPtr,
+		*configPtr,
+		*versionPtr,
+		*targetDirPtr,
+	)
 	if err != nil {
 		glog.Exit(err)
 	}
 }
 
-func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_archive.DebianPackageCreator, config_parser debian_config_parser.ConfigParser, tarGzPath string, configpath string, version string) error {
+func do(
+	debianPackageCreatorArchive debian_package_creator_archive.DebianPackageCreator,
+	config_parser debian_config_parser.ConfigParser,
+	tarGzPath string,
+	configpath string,
+	version string,
+	targetDir string,
+) error {
 	if len(tarGzPath) == 0 {
 		return fmt.Errorf("parameter %s missing", PARAMETER_CONFLUENCE_TAR_GZ_PATH)
 	}
@@ -86,7 +99,6 @@ func do(writer io.Writer, debianPackageCreatorArchive debian_package_creator_arc
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
 	sourceDir := fmt.Sprintf("atlassian-bamboo-%s", config.Version)
-	targetDir := bamboo.TARGET
 	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
 }
 

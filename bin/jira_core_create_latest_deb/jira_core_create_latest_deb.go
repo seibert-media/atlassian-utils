@@ -26,13 +26,15 @@ import (
 
 const (
 	PARAMETER_CONFIG = "config"
+	PARAMETER_TARGET = "target"
 )
 
 type CreatePackage func(config *debian_config.Config, sourceDir string, targetDir string) error
 type LatestVersion func() (string, error)
 
 var (
-	configPtr = flag.String(PARAMETER_CONFIG, "", "path to config")
+	configPtr    = flag.String(PARAMETER_CONFIG, "", "path to config")
+	targetDirPtr = flag.String(PARAMETER_TARGET, jira_core.TARGET, "target")
 )
 
 func main() {
@@ -59,14 +61,26 @@ func main() {
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
 	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 
-	err := do(latestDebianPackageCreator.CreateLatestDebianPackage, config_parser, *configPtr, latestVersion.LatestVersion)
+	err := do(
+		latestDebianPackageCreator.CreateLatestDebianPackage,
+		config_parser,
+		*configPtr,
+		latestVersion.LatestVersion,
+		*targetDirPtr,
+	)
 	if err != nil {
 		glog.Exit(err)
 	}
 
 }
 
-func do(createPackage CreatePackage, config_parser debian_config_parser.ConfigParser, configpath string, latestVersion LatestVersion) error {
+func do(
+	createPackage CreatePackage,
+	config_parser debian_config_parser.ConfigParser,
+	configpath string,
+	latestVersion LatestVersion,
+	targetDir string,
+) error {
 	var err error
 	config := createDefaultConfig()
 	if len(configpath) > 0 {
@@ -81,7 +95,6 @@ func do(createPackage CreatePackage, config_parser debian_config_parser.ConfigPa
 		return err
 	}
 	sourceDir := fmt.Sprintf("atlassian-jira-core-%s-standalone", config.Version)
-	targetDir := jira_core.TARGET
 	return createPackage(config, sourceDir, targetDir)
 }
 

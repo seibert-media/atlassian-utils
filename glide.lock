@@ -1,13 +1,13 @@
 hash: c5bf0ca237e3871cc3dd4a659955292cfcc299e6fafc87c82e42e9cc019db444
-updated: 2016-08-29T00:09:34.513827633+02:00
+updated: 2016-08-31T17:34:17.134525735+02:00
 imports:
 - name: github.com/bborbe/command
-  version: 5c99a9607441bc237a31c9ab0cb3648dce3de861
+  version: c353cc351a3d774eb04a68784bddc0b0af5fad70
   subpackages:
-  - list
   - adapter
+  - list
 - name: github.com/bborbe/debian_utils
-  version: 3cde787869f43ecdf37db5420db949eed51d7259
+  version: a46368a77e5a337ee1268485c1d15c6c00414c09
   subpackages:
   - config
   - config_builder
@@ -20,16 +20,16 @@ imports:
   - tar_gz_extractor
   - zip_extractor
 - name: github.com/bborbe/http
-  version: 610817d35e311dab1adfecb8b048aa019736a58e
+  version: addca5fc2e2de1bef39a64990873806e7fc9c0a9
   subpackages:
   - client_builder
   - requestbuilder
 - name: github.com/bborbe/io
-  version: 5891c542e99ec05e63ac475bc8a2202b2fca02aa
+  version: f014e6fbe9170c0692122497023eedb9d6e53cc2
   subpackages:
   - util
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
 testImports:
 - name: github.com/bborbe/assert
-  version: 639eac9a24e3c01472758f3c79452b8517bc29f6
+  version: 2db035a4c0870f6f48d1955f7b9542f9dbd4fb64

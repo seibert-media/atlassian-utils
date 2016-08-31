@@ -56,7 +56,16 @@ func main() {
 	crowdLatestVersion := atlassian_utils_latest_version.New(crowdLatestInformations.VersionInformations)
 
 	writer := os.Stdout
-	err := do(writer, bambooLatestVersion.LatestVersion, confluenceLatestVersion.LatestVersion, jiraCoreLatestVersion.LatestVersion, jiraServiceDeskLatestVersion.LatestVersion, jiraSoftwareLatestVersion.LatestVersion, bitbucketLatestVersion.LatestVersion, crowdLatestVersion.LatestVersion)
+	err := do(
+		writer,
+		bambooLatestVersion.LatestVersion,
+		confluenceLatestVersion.LatestVersion,
+		jiraCoreLatestVersion.LatestVersion,
+		jiraServiceDeskLatestVersion.LatestVersion,
+		jiraSoftwareLatestVersion.LatestVersion,
+		bitbucketLatestVersion.LatestVersion,
+		crowdLatestVersion.LatestVersion,
+	)
 	if err != nil {
 		glog.Exit(err)
 	}

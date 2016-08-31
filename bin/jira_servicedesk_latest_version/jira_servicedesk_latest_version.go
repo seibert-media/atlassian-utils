@@ -30,13 +30,19 @@ func main() {
 	latestVersion := atlassian_utils_latest_version.New(latestInformations.VersionInformations)
 
 	writer := os.Stdout
-	err := do(writer, latestVersion.LatestVersion)
+	err := do(
+		writer,
+		latestVersion.LatestVersion,
+	)
 	if err != nil {
 		glog.Exit(err)
 	}
 }
 
-func do(writer io.Writer, latestVersion LatestVersion) error {
+func do(
+	writer io.Writer,
+	latestVersion LatestVersion,
+) error {
 	version, err := latestVersion()
 	if err != nil {
 		return err

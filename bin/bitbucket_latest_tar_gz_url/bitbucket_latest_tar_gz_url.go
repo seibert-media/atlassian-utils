@@ -30,13 +30,19 @@ func main() {
 	latestUrl := atlassian_utils_latest_tar_gz_url.New(latestInformations.VersionInformations)
 
 	writer := os.Stdout
-	err := do(writer, latestUrl.LatestConfluenceTarGzUrl)
+	err := do(
+		writer,
+		latestUrl.LatestConfluenceTarGzUrl,
+	)
 	if err != nil {
 		glog.Exit(err)
 	}
 }
 
-func do(writer io.Writer, latestUrl LatestUrl) error {
+func do(
+	writer io.Writer,
+	latestUrl LatestUrl,
+) error {
 	version, err := latestUrl()
 	if err != nil {
 		return err
