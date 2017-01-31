@@ -28,7 +28,7 @@ func (l *latestVersion) LatestVersion() (string, error) {
 		return "", err
 	}
 	for _, info := range infos {
-		if info["platform"] == "Unix" || info["platform"] == "Mac OS X, Unix" {
+		if info["platform"] == "Unix" || info["platform"] == "Mac OS X, Unix" || info["platform"] == "Unix, Mac OS X" {
 			return info["version"], nil
 		}
 	}
