@@ -32,7 +32,7 @@ func main() {
 	writer := os.Stdout
 	err := do(
 		writer,
-		latestUrl.LatestConfluenceTarGzUrl,
+		latestUrl.LatestTarGzUrl,
 	)
 	if err != nil {
 		glog.Exit(err)

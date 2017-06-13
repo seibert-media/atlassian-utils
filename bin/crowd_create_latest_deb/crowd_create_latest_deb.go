@@ -59,7 +59,7 @@ func main() {
 	requestbuilderProvider := http_requestbuilder.NewHTTPRequestBuilderProvider()
 	debianPackageCreator := debian_package_creator.New(commandListProvider, copier, tarGzExtractor.ExtractTarGz, zipExtractor.ExtractZip, httpClient.Do, requestbuilderProvider.NewHTTPRequestBuilder)
 	creatorByReader := debian_package_creator_by_reader.New(commandListProvider, debianPackageCreator, tarGzExtractor.ExtractTarGz)
-	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestConfluenceTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
+	latestDebianPackageCreator := debian_latest_package_creator.New(httpClient.Get, latestUrl.LatestTarGzUrl, latestVersion.LatestVersion, creatorByReader.CreatePackage)
 
 	err := do(
 		latestDebianPackageCreator.CreateLatestDebianPackage,
@@ -71,7 +71,6 @@ func main() {
 	if err != nil {
 		glog.Exit(err)
 	}
-
 }
 
 func do(

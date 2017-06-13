@@ -8,7 +8,7 @@ import (
 
 func TestImplementsLatest(t *testing.T) {
 	b := New(nil)
-	var i (*LatestConfluenceTarGzUrl) = nil
+	var i (*LatestTarGzUrl) = nil
 	err := AssertThat(b, Implements(i).Message("check implements type Latest"))
 	if err != nil {
 		t.Fatal(err)

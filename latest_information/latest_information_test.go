@@ -46,3 +46,16 @@ func TestParseInfos(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestParseInfosZipUrl(t *testing.T) {
+	infos, err := parseInfos([]byte(`downloads([{"description":"2.12.0 - Standalone (ZIP Archive)","zipUrl":"https://www.atlassian.com/software/crowd/downloads/binary/atlassian-crowd-2.12.0.zip","tarUrl":null,"md5":null,"size":"172.4 MB","released":"26-Apr-2017","type":"Binary","platform":"Windows","version":"2.12.0","releaseNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Release+Notes","upgradeNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Upgrade+Notes"},{"description":"2.12.0 - Standalone (TAR.GZ Archive)","zipUrl":"https://www.atlassian.com/software/crowd/downloads/binary/atlassian-crowd-2.12.0.tar.gz","tarUrl":null,"md5":null,"size":"171.2 MB","released":"26-Apr-2017","type":"Binary","platform":"Unix, Mac OS X","version":"2.12.0","releaseNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Release+Notes","upgradeNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Upgrade+Notes"},{"description":"2.12.0 - CrowdID Server - WAR","zipUrl":"https://www.atlassian.com/software/crowd/downloads/binary/atlassian-crowd-openid-2.12.0-war.zip","tarUrl":null,"md5":null,"size":"40.2 MB","released":"26-Apr-2017","type":"Binary","platform":"Windows, Unix, Mac OS X","version":"2.12.0","releaseNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Release+Notes","upgradeNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Upgrade+Notes"},{"description":"2.12.0 - Crowd Server - WAR","zipUrl":"https://www.atlassian.com/software/crowd/downloads/binary/atlassian-crowd-2.12.0-war.zip","tarUrl":null,"md5":null,"size":"81.9 MB","released":"26-Apr-2017","type":"Binary","platform":"Windows, Unix, Mac OS X","version":"2.12.0","releaseNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Release+Notes","upgradeNotes":"http://confluence.atlassian.com/display/CROWD/Crowd+2.12+Upgrade+Notes"}])`))
+	if err := AssertThat(err, NilValue()); err != nil {
+		t.Fatal(err)
+	}
+	if err := AssertThat(len(infos), Is(4)); err != nil {
+		t.Fatal(err)
+	}
+	if err := AssertThat(infos[0]["zipUrl"], Is("https://www.atlassian.com/software/crowd/downloads/binary/atlassian-crowd-2.12.0.zip")); err != nil {
+		t.Fatal(err)
+	}
+}
