@@ -12,7 +12,7 @@ import (
 type VersionInformations func() ([]atlassian_information.VersionInformation, error)
 
 type LatestTarGzUrl interface {
-	LatestConfluenceTarGzUrl() (string, error)
+	LatestTarGzUrl() (string, error)
 }
 
 type latestTarGzUrl struct {

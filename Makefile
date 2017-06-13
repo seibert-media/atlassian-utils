@@ -1,3 +1,4 @@
+default: test install
 install:
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/atlassian_latest_versions/*.go
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/bamboo_create_deb/*.go
