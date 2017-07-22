@@ -82,15 +82,15 @@ Sample confluence.json
   "architecture": "all",
   "maintainer": "Benjamin Borbe <bborbe@rocketnews.de>",
   "description": "Confluence",
-  "postinst": "src/github.com/bborbe/confluence/postinst",
-  "postrm": "src/github.com/bborbe/confluence/postrm",
-  "prerm": "src/github.com/bborbe/confluence/prerm",
+  "postinst": "src/github.com/bborbe/atlassian-confluence/postinst",
+  "postrm": "src/github.com/bborbe/atlassian-confluence/postrm",
+  "prerm": "src/github.com/bborbe/atlassian-confluence/prerm",
   "depends": [
     "oracle-java8-installer"
   ],
   "files": [
     {
-      "source": "src/github.com/bborbe/confluence/etc/init.d/confluence",
+      "source": "src/github.com/bborbe/atlassian-confluence/etc/init.d/confluence",
       "target": "/etc/init.d/confluence"
     }
   ]
