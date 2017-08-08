@@ -19,6 +19,7 @@ import (
 	http_client_builder "github.com/bborbe/http/client_builder"
 	http_requestbuilder "github.com/bborbe/http/requestbuilder"
 	"github.com/golang/glog"
+	"strings"
 )
 
 const (
@@ -98,8 +99,16 @@ func do(
 	if len(config.Version) == 0 {
 		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
-	sourceDir := fmt.Sprintf("atlassian-crowd-%s", config.Version)
+	sourceDir := fmt.Sprintf("atlassian-crowd-%s", extractAtlassianVersion(config.Version))
 	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
+}
+
+func extractAtlassianVersion(version string) string {
+	pos := strings.IndexRune(version, '-')
+	if pos == -1 {
+		return version
+	}
+	return version[:pos]
 }
 
 func createDefaultConfig() *debian_config.Config {
