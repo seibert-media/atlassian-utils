@@ -111,7 +111,6 @@ func extractAtlassianVersion(version string) string {
 	return version[:pos]
 }
 
-
 func createDefaultConfig() *debian_config.Config {
 	config := debian_config.DefaultConfig()
 	config.Name = confluence.PACKAGE_NAME
