@@ -23,19 +23,21 @@ import (
 )
 
 const (
-	PARAMETER_CONFIG                 = "config"
-	PARAMETER_CONFLUENCE_TAR_GZ_PATH = "path"
-	PARAMETER_CONFLUENCE_VERSION     = "version"
-	PARAMETER_TARGET                 = "target"
+	PARAMETER_CONFIG            = "config"
+	PARAMETER_TAR_GZ_PATH       = "path"
+	PARAMETER_VERSION           = "version"
+	PARAMETER_ATLASSIAN_VERSION = "atlassian-version"
+	PARAMETER_TARGET            = "target"
 )
 
 type ConfigBuilderWithConfig func(config *debian_config.Config) debian_config_builder.ConfigBuilder
 
 var (
-	tarGzPathPtr = flag.String(PARAMETER_CONFLUENCE_TAR_GZ_PATH, "", "path to  tar gz")
-	versionPtr   = flag.String(PARAMETER_CONFLUENCE_VERSION, "", "version")
-	configPtr    = flag.String(PARAMETER_CONFIG, "", "path to config")
-	targetDirPtr = flag.String(PARAMETER_TARGET, confluence.TARGET, "target")
+	tarGzPathPtr        = flag.String(PARAMETER_TAR_GZ_PATH, "", "path to  tar gz")
+	versionPtr          = flag.String(PARAMETER_VERSION, "", "version")
+	atlassianVersionPtr = flag.String(PARAMETER_ATLASSIAN_VERSION, "", "atlassian version")
+	configPtr           = flag.String(PARAMETER_CONFIG, "", "path to config")
+	targetDirPtr        = flag.String(PARAMETER_TARGET, confluence.TARGET, "target")
 )
 
 func main() {
@@ -64,6 +66,7 @@ func main() {
 		*tarGzPathPtr,
 		*configPtr,
 		*versionPtr,
+		*atlassianVersionPtr,
 		*targetDirPtr,
 	)
 	if err != nil {
@@ -77,10 +80,14 @@ func do(
 	tarGzPath string,
 	configpath string,
 	version string,
+	atlassianVersion string,
 	targetDir string,
 ) error {
 	if len(tarGzPath) == 0 {
-		return fmt.Errorf("parameter %s missing", PARAMETER_CONFLUENCE_TAR_GZ_PATH)
+		return fmt.Errorf("parameter %s missing", PARAMETER_TAR_GZ_PATH)
+	}
+	if len(atlassianVersion) == 0 {
+		atlassianVersion = extractAtlassianVersion(version)
 	}
 	var err error
 	config := createDefaultConfig()
@@ -97,9 +104,9 @@ func do(
 	}
 	config = config_builder.Build()
 	if len(config.Version) == 0 {
-		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
+		return fmt.Errorf("parameter %s missing", PARAMETER_VERSION)
 	}
-	sourceDir := fmt.Sprintf("atlassian-confluence-%s", extractAtlassianVersion(config.Version))
+	sourceDir := fmt.Sprintf("atlassian-confluence-%s", atlassianVersion)
 	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
 }
 

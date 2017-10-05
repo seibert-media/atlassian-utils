@@ -8,7 +8,7 @@ import (
 
 func TestDo(t *testing.T) {
 	var err error
-	err = do(nil, nil, "", "", "", "")
+	err = do(nil, nil, "", "", "", "", "")
 	if err = AssertThat(err, NotNilValue()); err != nil {
 		t.Fatal(err)
 	}
