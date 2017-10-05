@@ -53,11 +53,11 @@
 		},
 		{
 			"source": "bin/confluence_eap_latest_tar_gz_url",
-			"target": "/opt/atlassian_utils/bin/confluence_latest_tar_gz_url"
+			"target": "/opt/atlassian_utils/bin/confluence_eap_latest_tar_gz_url"
 		},
 		{
 			"source": "bin/confluence_eap_latest_version",
-			"target": "/opt/atlassian_utils/bin/confluence_latest_version"
+			"target": "/opt/atlassian_utils/bin/confluence_eap_latest_version"
 		},
 		{
 			"source": "bin/confluence_latest_tar_gz_url",
