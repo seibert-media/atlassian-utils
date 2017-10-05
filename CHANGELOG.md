@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0
+
+- Add confluence-eap support
+
 ## 1.1.1
 
 - Add support for old JIRA

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SOURCEDIRECTORY="github.com/bborbe/atlassian_utils"
-VERSION="1.1.1-b${BUILD_NUMBER}"
+VERSION="1.2.0-b${BUILD_NUMBER}"
 NAME="atlassian-utils"
 
 ################################################################################
