@@ -97,7 +97,7 @@ func do(
 	}
 	config = config_builder.Build()
 	if len(config.Version) == 0 {
-		return fmt.Errorf("paramter %s missing", PARAMETER_CONFLUENCE_VERSION)
+		return fmt.Errorf("parameter %s missing", PARAMETER_CONFLUENCE_VERSION)
 	}
 	sourceDir := fmt.Sprintf("atlassian-bitbucket-%s", extractAtlassianVersion(config.Version))
 	return debianPackageCreatorArchive.CreatePackage(tarGzPath, config, sourceDir, targetDir)
