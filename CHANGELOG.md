@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.0
+
+- Add Jira-Software EAP commands
+
 ## 1.2.2
 
 - Fix eap targets

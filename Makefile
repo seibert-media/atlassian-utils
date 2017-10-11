@@ -35,6 +35,8 @@ install:
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/jira_software_create_latest_deb/*.go
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/jira_software_latest_tar_gz_url/*.go
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/jira_software_latest_version/*.go
+	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/jira_software_eap_latest_tar_gz_url/*.go
+	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install bin/jira_software_eap_latest_version/*.go
 test:
 	GO15VENDOREXPERIMENT=1 go test -cover `glide novendor`
 vet:
