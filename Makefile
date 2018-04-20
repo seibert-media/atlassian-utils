@@ -38,7 +38,7 @@ install:
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install cmd/jira_software_eap_latest_tar_gz_url/*.go
 	GOBIN=$(GOPATH)/bin GO15VENDOREXPERIMENT=1 go install cmd/jira_software_eap_latest_version/*.go
 test:
-	GO15VENDOREXPERIMENT=1 go test -cover `glide novendor`
+	go test -cover -race $(shell go list ./... | grep -v /vendor/)
 vet:
 	go tool vet .
 	go tool vet --shadow .
