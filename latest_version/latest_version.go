@@ -3,7 +3,7 @@ package latest_version
 import (
 	"fmt"
 
-	atlassian_information "github.com/bborbe/atlassian_utils/information"
+	atlassian_information "github.com/seibert-media/atlassian-utils/information"
 )
 
 type VersionInformations func() ([]atlassian_information.VersionInformation, error)

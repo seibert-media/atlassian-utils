@@ -4,63 +4,63 @@ Package provide some atlassian utils
 
 ## Install
 
-`go get github.com/bborbe/atlassian_utils/bin/atlassian_latest_versions`
+`go get github.com/seibert-media/atlassian-utils/cmd/atlassian_latest_versions`
 
-`go get github.com/bborbe/atlassian_utils/bin/bamboo_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/bamboo_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/bamboo_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/bamboo_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/bamboo_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/bamboo_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/bamboo_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/bamboo_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/bitbucket_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/bitbucket_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/bitbucket_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/bitbucket_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/bitbucket_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/bitbucket_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/bitbucket_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/bitbucket_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/confluence_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/confluence_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/confluence_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/confluence_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/confluence_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/confluence_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/confluence_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/confluence_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/crowd_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/crowd_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/crowd_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/crowd_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/crowd_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/crowd_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/crowd_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/crowd_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_core_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_core_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_core_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_core_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_core_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_core_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_core_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_core_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_servicedesk_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_servicedesk_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_servicedesk_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_servicedesk_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_servicedesk_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_servicedesk_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_servicedesk_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_servicedesk_latest_version`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_software_create_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_software_create_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_software_create_latest_deb`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_software_create_latest_deb`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_software_latest_tar_gz_url`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_software_latest_tar_gz_url`
 
-`go get github.com/bborbe/atlassian_utils/bin/jira_software_latest_version`
+`go get github.com/seibert-media/atlassian-utils/cmd/jira_software_latest_version`
 
 ## Create Confluence Debian Package
 

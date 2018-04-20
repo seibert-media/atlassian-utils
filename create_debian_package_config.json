@@ -5,7 +5,7 @@
 	"architecture": "amd64",
 	"maintainer": "Benjamin Borbe <bborbe@rocketnews.de>",
 	"description": "Atlassian Utils",
-	"postinst": "src/github.com/bborbe/atlassian_utils/postinst",
+	"postinst": "src/github.com/seibert-media/atlassian-utils/postinst",
 	"files": [
 		{
 			"source": "bin/crowd_create_deb",

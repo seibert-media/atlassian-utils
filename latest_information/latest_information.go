@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	atlassian_information "github.com/bborbe/atlassian_utils/information"
+	atlassian_information "github.com/seibert-media/atlassian-utils/information"
 	"github.com/golang/glog"
 )
 
