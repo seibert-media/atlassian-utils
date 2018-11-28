@@ -8,135 +8,151 @@
 	"postinst": "src/github.com/seibert-media/atlassian-utils/postinst",
 	"files": [
 		{
-			"source": "bin/crowd_create_deb",
+			"source": "cmd/crowd_create_deb",
 			"target": "/opt/atlassian_utils/bin/crowd_create_deb"
 		},
 		{
-			"source": "bin/crowd_create_latest_deb",
+			"source": "cmd/crowd_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/crowd_create_latest_deb"
 		},
 		{
-			"source": "bin/crowd_latest_tar_gz_url",
+			"source": "cmd/crowd_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/crowd_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/crowd_latest_version",
+			"source": "cmd/crowd_latest_version",
 			"target": "/opt/atlassian_utils/bin/crowd_latest_version"
 		},
 		{
-			"source": "bin/bitbucket_create_deb",
+			"source": "cmd/bitbucket_create_deb",
 			"target": "/opt/atlassian_utils/bin/bitbucket_create_deb"
 		},
 		{
-			"source": "bin/bitbucket_create_latest_deb",
+			"source": "cmd/bitbucket_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/bitbucket_create_latest_deb"
 		},
 		{
-			"source": "bin/bitbucket_latest_tar_gz_url",
+			"source": "cmd/bitbucket_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/bitbucket_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/bitbucket_latest_version",
+			"source": "cmd/bitbucket_latest_version",
 			"target": "/opt/atlassian_utils/bin/bitbucket_latest_version"
 		},
 		{
-			"source": "bin/atlassian_latest_versions",
+			"source": "cmd/atlassian_latest_versions",
 			"target": "/opt/atlassian_utils/bin/atlassian_latest_versions"
 		},
 		{
-			"source": "bin/confluence_create_deb",
+			"source": "cmd/confluence_create_deb",
 			"target": "/opt/atlassian_utils/bin/confluence_create_deb"
 		},
 		{
-			"source": "bin/confluence_create_latest_deb",
+			"source": "cmd/confluence_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/confluence_create_latest_deb"
 		},
 		{
-			"source": "bin/confluence_eap_latest_tar_gz_url",
+			"source": "cmd/confluence_eap_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/confluence_eap_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/confluence_eap_latest_version",
+			"source": "cmd/confluence_eap_latest_version",
 			"target": "/opt/atlassian_utils/bin/confluence_eap_latest_version"
 		},
 		{
-			"source": "bin/confluence_latest_tar_gz_url",
+			"source": "cmd/confluence_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/confluence_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/confluence_latest_version",
+			"source": "cmd/confluence_latest_version",
 			"target": "/opt/atlassian_utils/bin/confluence_latest_version"
 		},
 		{
-			"source": "bin/bamboo_create_deb",
+			"source": "cmd/bamboo_create_deb",
 			"target": "/opt/atlassian_utils/bin/bamboo_create_deb"
 		},
 		{
-			"source": "bin/bamboo_create_latest_deb",
+			"source": "cmd/bamboo_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/bamboo_create_latest_deb"
 		},
 		{
-			"source": "bin/bamboo_latest_tar_gz_url",
+			"source": "cmd/bamboo_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/bamboo_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/bamboo_latest_version",
+			"source": "cmd/bamboo_latest_version",
 			"target": "/opt/atlassian_utils/bin/bamboo_latest_version"
 		},
 		{
-			"source": "bin/jira_core_create_deb",
+			"source": "cmd/jira_create_deb",
+			"target": "/opt/atlassian_utils/bin/jira_create_deb"
+		},
+		{
+			"source": "cmd/jira_create_latest_deb",
+			"target": "/opt/atlassian_utils/bin/jira_create_latest_deb"
+		},
+		{
+			"source": "cmd/jira_latest_tar_gz_url",
+			"target": "/opt/atlassian_utils/bin/jira_latest_tar_gz_url"
+		},
+		{
+			"source": "cmd/jira_latest_version",
+			"target": "/opt/atlassian_utils/bin/jira_latest_version"
+		},
+		{
+			"source": "cmd/jira_core_create_deb",
 			"target": "/opt/atlassian_utils/bin/jira_core_create_deb"
 		},
 		{
-			"source": "bin/jira_core_create_latest_deb",
+			"source": "cmd/jira_core_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/jira_core_create_latest_deb"
 		},
 		{
-			"source": "bin/jira_core_latest_tar_gz_url",
+			"source": "cmd/jira_core_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/jira_core_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/jira_core_latest_version",
+			"source": "cmd/jira_core_latest_version",
 			"target": "/opt/atlassian_utils/bin/jira_core_latest_version"
 		},
 		{
-			"source": "bin/jira_servicedesk_create_deb",
+			"source": "cmd/jira_servicedesk_create_deb",
 			"target": "/opt/atlassian_utils/bin/jira_servicedesk_create_deb"
 		},
 		{
-			"source": "bin/jira_servicedesk_create_latest_deb",
+			"source": "cmd/jira_servicedesk_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/jira_servicedesk_create_latest_deb"
 		},
 		{
-			"source": "bin/jira_servicedesk_latest_tar_gz_url",
+			"source": "cmd/jira_servicedesk_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/jira_servicedesk_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/jira_servicedesk_latest_version",
+			"source": "cmd/jira_servicedesk_latest_version",
 			"target": "/opt/atlassian_utils/bin/jira_servicedesk_latest_version"
 		},
 		{
-			"source": "bin/jira_software_create_deb",
+			"source": "cmd/jira_software_create_deb",
 			"target": "/opt/atlassian_utils/bin/jira_software_create_deb"
 		},
 		{
-			"source": "bin/jira_software_create_latest_deb",
+			"source": "cmd/jira_software_create_latest_deb",
 			"target": "/opt/atlassian_utils/bin/jira_software_create_latest_deb"
 		},
 		{
-			"source": "bin/jira_software_eap_latest_tar_gz_url",
+			"source": "cmd/jira_software_eap_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/jira_software_eap_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/jira_software_eap_latest_version",
+			"source": "cmd/jira_software_eap_latest_version",
 			"target": "/opt/atlassian_utils/bin/jira_software_eap_latest_version"
 		},
 		{
-			"source": "bin/jira_software_latest_tar_gz_url",
+			"source": "cmd/jira_software_latest_tar_gz_url",
 			"target": "/opt/atlassian_utils/bin/jira_software_latest_tar_gz_url"
 		},
 		{
-			"source": "bin/jira_software_latest_version",
+			"source": "cmd/jira_software_latest_version",
 			"target": "/opt/atlassian_utils/bin/jira_software_latest_version"
 		}
 	]
