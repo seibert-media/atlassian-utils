@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SOURCEDIRECTORY="github.com/seibert-media/atlassian-utils"
-VERSION="1.3.0-b${BUILD_NUMBER}"
+VERSION="1.3.1-b${BUILD_NUMBER}"
 NAME="atlassian-utils"
 
 ################################################################################
