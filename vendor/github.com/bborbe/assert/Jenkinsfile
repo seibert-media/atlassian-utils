@@ -6,7 +6,7 @@ podTemplate(
 	containers: [
 		containerTemplate(
 			name: 'build-golang',
-			image: 'docker.io/bborbe/build-golang:1.0.0',
+			image: 'eu.gcr.io/smedia-kubernetes/build-golang:1.12.0-1.3.2',
 			ttyEnabled: true,
 			command: 'cat',
 			resourceRequestCpu: '500m',
