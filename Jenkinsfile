@@ -6,7 +6,7 @@ podTemplate(
 	containers: [
 		containerTemplate(
 			name: 'build-golang',
-			image: 'eu.gcr.io/smedia-kubernetes/build-golang:1.12.0-1.3.2',
+			image: 'eu.gcr.io/gce-smedia-k8s/infinite-legacy/build-golang:1.12.0-1.3.2',
 			ttyEnabled: true,
 			command: 'cat',
 			resourceRequestCpu: '500m',
@@ -17,7 +17,6 @@ podTemplate(
 	],
 	volumes: [],
 	inheritFrom: '',
-	namespace: 'jenkins',
 	serviceAccount: '',
 	workspaceVolume: emptyDirWorkspaceVolume(false),
 ) {
